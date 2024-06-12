@@ -1,0 +1,62 @@
+<p>Grade Management works!</p>
+
+<div class="container">
+    <form #gradeForm="ngForm" (ngSubmit)="saveGrade()">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3>{{ editMode ? 'Edit Grade' : 'Add Grade' }}</h3>
+            </div>
+            <div class="form-group">
+                <label for="id" class="form-label">id</label>
+                <input type="text" class="form-control" id="id" name="id"
+                       [(ngModel)]="grade.id" required>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="student" class="form-label">Student</label>
+                    <input type="text" class="form-control" id="student" name="student"
+                           [(ngModel)]="grade.student" required>
+                </div>
+                <div class="form-group">
+                    <label for="coursecode" class="form-label">Coursecode</label>
+                    <input type="text" class="form-control" id="course" name="course"
+                           [(ngModel)]="grade.coursecode" required>
+                </div>
+                <div class="form-group">
+                    <label for="grade" class="form-label">Grade</label>
+                    <input type="text" class="form-control" id="grade" name="grade"
+                           [(ngModel)]="grade.gradevalue" required>
+                </div>
+            </div>
+            <div class="card-footer bg-warning text-white">
+                <button type="submit" class="btn btn-success">{{ editMode ? 'Update' : 'Add' }} Grade</button>
+                <button type="button" class="btn btn-secondary" (click)="resetForm()">Reset</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="mt-4">
+        <h3>Grades</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Student</th>
+                    <th>Coursecode</th>
+                    <th>Grade</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let grade of grades">
+                    <td>{{ grade.student }}</td>
+                    <td>{{ grade.coursecode }}</td>
+                    <td>{{ grade.gradevalue }}</td>
+                    <td>
+                        <button class="btn btn-primary" *ngIf="isFaculty" (click)="editGrade(grade)">Edit</button>
+                        <button class="btn btn-danger" *ngIf="isFaculty && grade.id" (click)="deleteGrade(grade.id!)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

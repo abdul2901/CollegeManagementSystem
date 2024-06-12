@@ -1,0 +1,90 @@
+<div class="container">
+    <h2>Class Scheduling</h2>
+    
+    <!-- Form for adding/editing class schedule -->
+    <div class="card mb-3">
+      <div class="card-header">
+        {{ editMode ? 'Edit Schedule' : 'Add New Schedule' }}
+      </div>
+      <div class="card-body">
+        <form #scheduleForm="ngForm" (ngSubmit)="saveSchedule()">
+          <!-- Course -->
+          <div class="form-group">
+            <label for="course">Course:</label>
+            <input type="text" class="form-control" id="course" name="course" [(ngModel)]="schedule.course" required>
+          </div>
+          
+          <!-- Faculty -->
+          <div class="form-group">
+            <label for="faculty">Faculty:</label>
+            <input type="text" class="form-control" id="faculty" name="faculty" [(ngModel)]="schedule.faculty" required>
+          </div>
+          
+          <!-- Day of the Week -->
+          <div class="form-group">
+            <label for="dayOfWeek">Day of the Week:</label>
+            <input type="text" class="form-control" id="dayOfWeek" name="dayOfWeek" [(ngModel)]="schedule.dayOfWeek" required>
+          </div>
+          
+          <!-- Start Time -->
+          <div class="form-group">
+            <label for="startTime">Start Time:</label>
+            <input type="time" class="form-control" id="startTime" name="startTime" [(ngModel)]="schedule.startTime" required>
+          </div>
+          
+          <!-- End Time -->
+          <div class="form-group">
+            <label for="endTime">End Time:</label>
+            <input type="time" class="form-control" id="endTime" name="endTime" [(ngModel)]="schedule.endTime" required>
+          </div>
+          
+          <!-- Classroom -->
+          <div class="form-group">
+            <label for="classroom">Classroom:</label>
+            <input type="text" class="form-control" id="classroom" name="classroom" [(ngModel)]="schedule.classroom" required>
+          </div>
+          
+          <!-- Submit button -->
+          <button type="submit" class="btn btn-primary">{{ editMode ? 'Update' : 'Add' }} Schedule</button>
+          <button type="button" class="btn btn-secondary" (click)="resetForm()">Cancel</button>
+        </form>
+      </div>
+    </div>
+    
+    <!-- Table for displaying existing schedules -->
+    <div class="card">
+      <div class="card-header">Current Class Schedules</div>
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Course</th>
+              <th>Faculty</th>
+              <th>Day of the Week</th>
+              <th>Start Time</th>
+              <th>End Time</th>
+              <th>Classroom</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let schedule of schedules">
+              <td >{{ schedule.course }}</td>
+              <td>{{ schedule.faculty }}</td>
+              <td>{{ schedule.dayOfWeek }}</td>
+              <td>{{ schedule.startTime }}</td>
+              <td>{{ schedule.endTime }}</td>
+              <td>{{ schedule.classroom }}</td>
+              <td>
+                <button class="btn btn-sm btn-info" (click)="editSchedule(schedule)">Edit</button>
+                <button class="btn btn-sm btn-danger" (click)="deleteSchedule(schedule.id)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+
+  <!-- *ngIf="schedule.course==this.scheduleservice.stu.major" -->

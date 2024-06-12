@@ -1,0 +1,57 @@
+<!-- <div class="container">
+    <form #loginform="ngForm" (ngSubmit)="login(loginform)">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3>Login</h3>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" ngModel required>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" ngModel required>
+                </div>
+            </div>
+            <div class="card-footer bg-warning text-white">
+                <button type="submiT" class="btn btn-success" [disabled]="loginform.invalid">Login</button>
+            </div>
+        </div>
+    </form>
+</div> -->
+
+
+<!-- login.component.html -->
+<div class="container">
+    <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3>Login</h3>
+            </div>
+            <div class="card-body">
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email"
+                           ngModel required #loginEmail="ngModel">
+                    <div class="text-danger" *ngIf="!loginEmail.valid && loginEmail.touched">
+                        Email is required
+                    </div>
+                </div>
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password"
+                           ngModel required #loginPassword="ngModel">
+                    <div class="text-danger" *ngIf="!loginPassword.valid && loginPassword.touched">
+                        Password is required
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-warning text-white">
+                <button type="submit" class="btn btn-success" [disabled]="loginForm.invalid">Login</button>
+            </div>
+        </div>
+    </form>
+</div>
